@@ -1,7 +1,15 @@
 import { bindable, customElement } from '@aurelia/runtime';
 
-const view = `
-<template>
+const view = `<template><div style='height: 50px; background-color: #fff; text-align: center;'>
+  <style>
+    .control {
+      display: inline-block;
+      vertical-align: top;
+      width: 150px;
+      height: 50px;
+      color: #000;
+    }
+  </style>
   <div style='height: 50px; background-color: #fff; text-align: center;'>
     <label class='control'>
       Immutable<br/>
@@ -14,12 +22,13 @@ const view = `
     mouseup.delegate='big = false'
     style='height: calc(100% - 50px);'>
 
-    <div
+    <div bindable='label, x, y, big, color'
       class="cursor \${big ? 'big' : '' } \${label ? 'label' : ''}"
-      style='
+      css='
         left: \${x || 0}px;
         top: \${y || 0}px;
         border-color: \${color};'>
+      <span class='label' if.bind='label'>\${x}, \${y}</span>
     </div>
     <div
       repeat.for='cursor of cursors'
@@ -30,9 +39,9 @@ const view = `
         border-color: \${color};'>
       <span class='label' if.bind='label'>\${x}, \${y}</span>
     </div>
-  </div>
-</template>
-`;
+    </div>
+
+</template>`;
 
 const COUNT = 200;
 const LOOPS = 6;
@@ -61,12 +70,12 @@ export class App {
   immutable: boolean;
 
   immutableChanged(immutable: boolean) {
-    this.render = immutable ? this.immutableRerder : this.mutableRender;
+    this.doRender = immutable ? this.immutableRerder : this.mutableRender;
   }
 
-  // attached() {
-  //   requestAnimationFrame(this.render);
-  // }
+  attached() {
+    requestAnimationFrame(this.doRender);
+  }
 
   immutableRerder = () => {
     let counter = ++this.counter;
@@ -87,7 +96,7 @@ export class App {
     }
 
     this.cursors = cursors;
-    requestAnimationFrame(this.render);
+    requestAnimationFrame(this.doRender);
   }
 
   mutableRender = () => {
@@ -130,10 +139,10 @@ export class App {
       });
     }
 
-    requestAnimationFrame(this.render);
+    requestAnimationFrame(this.doRender);
   }
 
-  render = this.mutableRender;
+  doRender = this.mutableRender;
 
   setXY({ pageX, pageY }: MouseEvent) {
     this.x = pageX;

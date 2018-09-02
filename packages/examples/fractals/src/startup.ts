@@ -23,5 +23,4 @@ const au = window['au'] = new Aurelia()
   )
   .app({ host: document.querySelector('app'), component: new App() });
 
-au.register(<any>Pythagoras);
 au.start();

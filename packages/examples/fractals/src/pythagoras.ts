@@ -21,6 +21,8 @@ let id = 1;
     required: true,
     compiler: 'default'
   },
+  instructions: [],
+  surrogates: [],
   templateOrNode: (() => {
     const template = document.createElement('template');
     const parser = document.createElement('div');
@@ -58,7 +60,7 @@ parser.innerHTML = `
 while (parser.firstElementChild.firstElementChild) {
   template.content.appendChild(parser.firstElementChild.firstElementChild);
 }
-    return template;
+    return template.outerHTML;
   })(),
 })
 export class Pythagoras {

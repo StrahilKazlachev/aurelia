@@ -196,7 +196,7 @@ export class TemplateCompiler implements ITemplateCompiler {
       return;
     }
 
-    const tagResourceKey = tagName.toLowerCase();
+    const tagResourceKey = (node.getAttribute('as-element') || tagName).toLowerCase();
     elementDefinition = resources.find(CustomElementResource, tagResourceKey);
     if (elementDefinition) {
       elementInstruction = new HydrateElementInstruction(tagResourceKey, []);

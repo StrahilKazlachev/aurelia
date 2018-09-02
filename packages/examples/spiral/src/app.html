@@ -1,0 +1,42 @@
+<template>
+  <style>
+    .control {
+      display: inline-block;
+      vertical-align: top;
+      width: 150px;
+      height: 50px;
+      color: #000;
+    }
+  </style>
+  <div style='height: 50px; background-color: #fff; text-align: center;'>
+    <label class='control'>
+      Immutable<br/>
+      <input type='checkbox' checked.bind='immutable' />
+    </label>
+  </div>
+  <div
+    mousemove.delegate='setXY($event)'
+    mousedown.delegate='big = true'
+    mouseup.delegate='big = false'
+    style='height: calc(100% - 50px);'>
+
+    <div bindable='label, x, y, big, color'
+      class="cursor ${big ? 'big' : '' } ${label ? 'label' : ''}"
+      css='
+        left: ${x || 0}px;
+        top: ${y || 0}px;
+        border-color: ${color};'>
+      <span class='label' if.bind='label'>${x}, ${y}</span>
+    </div>
+    <div
+      repeat.for='cursor of cursors'
+      class="cursor ${big ? 'big' : '' } ${label ? 'label' : ''}"
+      css='
+        left: ${x || 0}px;
+        top: ${y || 0}px;
+        border-color: ${color};'>
+      <span class='label' if.bind='label'>${x}, ${y}</span>
+    </div>
+  </div>
+
+</template>

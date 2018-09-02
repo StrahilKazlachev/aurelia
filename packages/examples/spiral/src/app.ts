@@ -14,7 +14,7 @@ const view = `
     mouseup.delegate='big = false'
     style='height: calc(100% - 50px);'>
 
-    <div bindable='label, x, y, big, color'
+    <div
       class="cursor \${big ? 'big' : '' } \${label ? 'label' : ''}"
       style='
         left: \${x || 0}px;
@@ -22,11 +22,13 @@ const view = `
         border-color: \${color};'>
     </div>
     <div
+      repeat.for='cursor of cursors'
       class="cursor \${big ? 'big' : '' } \${label ? 'label' : ''}"
-      style='
+      css='
         left: \${x || 0}px;
         top: \${y || 0}px;
         border-color: \${color};'>
+      <span class='label' if.bind='label'>\${x}, \${y}</span>
     </div>
   </div>
 </template>

@@ -2,10 +2,9 @@
 import { DebugConfiguration } from '@aurelia/debug';
 import { BasicConfiguration } from '@aurelia/jit';
 import { IContainer } from '@aurelia/kernel';
+import { register as svgPlugin } from '@aurelia/plugin-svg';
 import { Aurelia } from '@aurelia/runtime';
-import { register } from '@aurelia/plugin-svg';
-import { App } from './app';
-import { Pythagoras } from './pythagoras';
+import { App, Pythagoras } from './app';
 
 console.log({ App, Pythagoras });
 
@@ -16,8 +15,9 @@ const au = window['au'] = new Aurelia()
     // Pythagoras as any,
     {
       register(container: IContainer) {
-        register(container);
-        (Pythagoras as any).register(container);
+        svgPlugin(container);
+        // container.register(Pythagoras as any);
+        // (Pythagoras as any).register(container);
       }
     }
   )

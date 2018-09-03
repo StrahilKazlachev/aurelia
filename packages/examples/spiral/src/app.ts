@@ -1,6 +1,6 @@
 import { bindable, customElement } from '@aurelia/runtime';
 
-const view = `<template><div style='height: 50px; background-color: #fff; text-align: center;'>
+const view = `<template>
   <style>
     .control {
       display: inline-block;
@@ -22,7 +22,7 @@ const view = `<template><div style='height: 50px; background-color: #fff; text-a
     mouseup.delegate='big = false'
     style='height: calc(100% - 50px);'>
 
-    <div bindable='label, x, y, big, color'
+    <div
       class="cursor \${big ? 'big' : '' } \${label ? 'label' : ''}"
       css='
         left: \${x || 0}px;
@@ -32,12 +32,12 @@ const view = `<template><div style='height: 50px; background-color: #fff; text-a
     </div>
     <div
       repeat.for='cursor of cursors'
-      class="cursor \${big ? 'big' : '' } \${label ? 'label' : ''}"
-      css='
-        left: \${x || 0}px;
-        top: \${y || 0}px;
-        border-color: \${color};'>
-      <span class='label' if.bind='label'>\${x}, \${y}</span>
+      class="cursor \${cursor.big ? 'big' : '' } \${cursor.label ? 'label' : ''}"
+      style='
+        left: \${cursor.x || 0}px;
+        top: \${cursor.y || 0}px;
+        border-color: \${cursor.color};'>
+      <span class='label' if.bind='label'>\${cursor.x}, \${cursor.y}</span>
     </div>
     </div>
 

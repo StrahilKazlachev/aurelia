@@ -12,10 +12,7 @@
     "@aurelia/debug": "../../debug",
     "@aurelia/jit": "../../jit",
     "@aurelia/kernel": "../../kernel",
-    "@aurelia/plugin-svg": "file:../../plugin-svg",
     "@aurelia/runtime": "../../runtime",
-    "d3-scale": "^2.1.2",
-    "d3-selection": "^1.3.2",
     "requirejs": "^2.3.5",
     "text": "github:requirejs/text#latest"
   },
